@@ -28,3 +28,7 @@ export const Description = styled.Text`
   line-height: 20px;
   margin-top: 10px;
 `
+
+export const List = styled.FlatList`
+  margin-top: 45px;
+`
