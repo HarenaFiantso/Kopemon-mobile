@@ -1,9 +1,20 @@
-import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import * as Styled from '@/styles/home.style'
+import SearchBar from '@/components/SearchBar'
 
 export default function Home() {
-  return <View>
-    <Text>Home screen</Text>
-    <Link href="/details">Go to details</Link>
-  </View>
+  const pokeball = require('@/assets/images/pokeball/pokeball.png')
+
+  return (
+    <Styled.Container>
+      <Styled.Pokeball source={pokeball} />
+      <Styled.Title>Pokédex</Styled.Title>
+      <Styled.Description>
+        Search for Pokémon by name or using the National Pokédex number.
+      </Styled.Description>
+      <SearchBar
+        style={{ marginTop: 25 }}
+        placeholder='What Pokémon are you looking for?'
+      />
+    </Styled.Container>
+  )
 }
