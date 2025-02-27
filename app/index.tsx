@@ -2,19 +2,49 @@ import { StatusBar } from 'expo-status-bar'
 import * as Styled from '@/styles/home.style'
 import SearchBar from '@/components/SearchBar'
 import { useCallback, useEffect, useState } from 'react'
-import { ListRenderItemInfo } from 'react-native'
+import { ListRenderItemInfo, NativeScrollEvent, NativeSyntheticEvent } from 'react-native'
 import Card from '@/components/Card'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { useRouter } from 'expo-router'
 
+const INITIAL_TAKE = 10
+const TAKE_ON_SCROLL = 10
+
 export default function Home() {
   const router = useRouter()
+  const [take, setTake] = useState(INITIAL_TAKE)
   const [pokemons, setPokemons] = useState<any>([])
+  const [pokemonsSearch, setPokemonsSearch] = useState<any>([])
   const pokeball = require('@/assets/images/pokeball/pokeball.png')
 
   const handleSearch = (query: string) => {
-    /* TODO: Not implemented */
+    if (query && pokemons) {
+      const matches = pokemons?.filter(
+        ({ id, name }: { id: string; name: string }) =>
+          id === query || name.includes(query.toLowerCase()),
+      )
+
+      if (matches) {
+        setPokemonsSearch(matches)
+      }
+    } else {
+      setPokemonsSearch(undefined)
+    }
   }
+
+  const handleScroll = useCallback(
+    (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+      if (
+        (e.nativeEvent.layoutMeasurement.height +
+          e.nativeEvent.contentOffset.y) /
+          e.nativeEvent.contentSize.height >=
+        0.85
+      ) {
+        setTake((prev) => prev + TAKE_ON_SCROLL)
+      }
+    },
+    [],
+  )
 
   const renderItem = useCallback((element: ListRenderItemInfo<any>) => {
     const pokemon = element.item as any
@@ -51,10 +81,11 @@ export default function Home() {
           onChangeText={handleSearch}
         />
         <Styled.List
-          data={pokemons?.slice(0, 10)}
+          data={pokemonsSearch || pokemons?.slice(0, take)}
           contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}
           scrollEventThrottle={33}
+          onScroll={handleScroll}
           renderItem={renderItem}
           keyExtractor={(item: any) => item.url}
         />

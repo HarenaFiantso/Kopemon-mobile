@@ -3,8 +3,6 @@ import getColorFromType from '@/utils/getColorFromType'
 import { View } from 'react-native'
 
 const About = ({ pokemonData }: any) => {
-  console.log(pokemonData)
-
   return (
     <Styled.Container>
       <Styled.Description>{pokemonData.description}</Styled.Description>
