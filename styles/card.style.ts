@@ -2,7 +2,7 @@ import styled from 'styled-components/native'
 import { RectButton } from 'react-native-gesture-handler'
 import getColorFromType from '@/utils/getColorFromType'
 
-export const Container = styled(RectButton) <{ type: string }>`
+export const Container = styled(RectButton)<{ type: string }>`
   height: 130px;
   padding: 20px;
   overflow: hidden;

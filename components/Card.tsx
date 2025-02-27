@@ -3,7 +3,7 @@ import * as Styled from '@/styles/card.style'
 import { Text } from 'react-native'
 import TypeCard from './TypeCard'
 
-const Card = ({ pokemonData }: any) => {
+const Card = ({ pokemonData, onPress }: any) => {
   const [details, setDetails] = useState<any>(null)
   const { url } = pokemonData
   const pokeball = require('@/assets/images/pokeball/pokeball.png')
@@ -18,7 +18,7 @@ const Card = ({ pokemonData }: any) => {
   if (!details) return <Text>Loading...</Text>
 
   return (
-    <Styled.Container type={details.types[0].type.name}>
+    <Styled.Container type={details.types[0].type.name} onPress={onPress}>
       <Styled.ID>#{String(details.id).padStart(3, '0')}</Styled.ID>
       <Styled.Name>{details.name}</Styled.Name>
       <Styled.Pokeball source={pokeball} />

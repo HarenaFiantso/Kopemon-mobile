@@ -2,28 +2,39 @@ import { StatusBar } from 'expo-status-bar'
 import * as Styled from '@/styles/home.style'
 import SearchBar from '@/components/SearchBar'
 import { useCallback, useEffect, useState } from 'react'
-import { ListRenderItemInfo, Text } from 'react-native'
+import { ListRenderItemInfo } from 'react-native'
 import Card from '@/components/Card'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { useRouter } from 'expo-router'
 
 export default function Home() {
+  const router = useRouter()
   const [pokemons, setPokemons] = useState<any>([])
   const pokeball = require('@/assets/images/pokeball/pokeball.png')
+
   const handleSearch = (query: string) => {
-    console.log(query)
+    /* TODO: Not implemented */
   }
 
-  const renderItem = useCallback((element: ListRenderItemInfo<any>) => {    
+  const renderItem = useCallback((element: ListRenderItemInfo<any>) => {
     const pokemon = element.item as any
-    return <Card pokemonData={pokemon} />
+    return (
+      <Card
+        pokemonData={pokemon}
+        onPress={() =>
+          router.push({
+            pathname: '/details',
+            params: { pokemon: JSON.stringify(pokemon) },
+          })
+        }
+      />
+    )
   }, [])
 
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon`)
       .then((response) => response.json())
       .then((data) => setPokemons(data.results))
-
-    fetch
   }, [])
 
   return (
