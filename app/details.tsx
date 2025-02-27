@@ -5,11 +5,14 @@ import * as Styled from '@/styles/details.style'
 import { useNavigation } from '@react-navigation/native'
 import BackButton from '@/components/BackButton'
 import TypeCard from '@/components/TypeCard'
+import Navbar from '@/components/Navbar'
+import getColorFromType from '@/utils/getColorFromType'
+import About from '@/components/About'
 
 export default function Details() {
   const [details, setDetails] = useState<any>(null)
   const params = useLocalSearchParams()
-  const navigation = useNavigation();
+  const navigation = useNavigation()
   const { url } = JSON.parse(params.pokemon as string)
   const pokeball = require('@/assets/images/pokeball/pokeball.png')
 
@@ -38,6 +41,18 @@ export default function Details() {
         <Styled.Pokeball source={pokeball} />
         <Styled.Pokemon source={{ uri: details.sprites.front_default }} />
       </Styled.Header>
+      <Styled.Main>
+        <Navbar
+          tabs={[
+            {
+              name: 'About',
+              component: <About pokemonData={details} />,
+            },
+          ]}
+          style={{ marginTop: 40 }}
+          indicatorColor={getColorFromType(details.types[0].type.name)}
+        />
+      </Styled.Main>
     </Styled.Container>
   )
 }
