@@ -16,6 +16,7 @@ export default function Home() {
   const [pokemons, setPokemons] = useState<any>([])
   const [pokemonsSearch, setPokemonsSearch] = useState<any>([])
   const pokeball = require('@/assets/images/pokeball/pokeball.png')
+  const pokeapiUrl = `https://pokeapi.co/api/v2/pokemon?offset=0&limit=1304`
 
   const handleSearch = (query: string) => {
     if (query && pokemons) {
@@ -62,10 +63,13 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon`)
+    fetch(pokeapiUrl)
       .then((response) => response.json())
       .then((data) => setPokemons(data.results))
   }, [])
+  // TODO: Implement clean infinite scroll:
+  //      - Load more Pokémon when scrolling near the bottom (pagination on scroll).
+  //      - When the search bar is focused, filter results from all Pokémon, not just the ones already fetched.
 
   return (
     <GestureHandlerRootView>
