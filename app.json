@@ -33,6 +33,12 @@
           "resizeMode": "contain",
           "backgroundColor": "#FF3D00"
         }
+      ],
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "DEFAULT"
+        }
       ]
     ],
     "experiments": {
