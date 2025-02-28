@@ -6,6 +6,7 @@ export const Container = styled.View`
   padding: 25px;
   padding-top: ${25 + Constants.statusBarHeight}px;
   padding-bottom: 0;
+  background-color: ${({ theme }) => theme.background};
 `
 
 export const Pokeball = styled.Image`
