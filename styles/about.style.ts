@@ -11,7 +11,7 @@ export const Row = styled.View`
 `
 
 export const Description = styled.Text`
-  color: #747476;
+  color: ${(props: any) => props.theme.text};
   font-size: 12px;
   margin-bottom: 10px;
 `
@@ -20,16 +20,16 @@ export const Title = styled.Text<{ color: string }>`
   margin: 20px 0;
   font-size: 16px;
   font-weight: bold;
-  color: ${(props: any) => props.color};
+  color: ${(props: any) => props.theme.text};
 `
 
 export const LeftText = styled.Text`
-  color: #000;
+  color: ${(props: any) => props.theme.text};
   width: 120px;
   font-size: 12px;
   font-weight: bold;
 `
 
 export const RightText = styled.Text`
-  color: #747476;
+  color: ${(props: any) => props.theme.text};
 `

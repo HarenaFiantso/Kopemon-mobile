@@ -20,19 +20,19 @@ export const Header = styled.View`
 
 export const Main = styled.View`
   flex: 1;
-  background: #fff;
+  background-color: ${(props: any) => props.theme.background};
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
 `
 
 export const ID = styled.Text`
-  color: #fff;
+  color: ${(props: any) => props.theme.text};
   font-size: 16px;
   font-weight: bold;
 `
 
 export const Name = styled.Text`
-  color: #fff;
+  color: ${(props: any) => props.theme.text};
   font-size: 36px;
   font-weight: bold;
   margin-bottom: 10px;

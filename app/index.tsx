@@ -2,7 +2,12 @@ import { StatusBar } from 'expo-status-bar'
 import * as Styled from '@/styles/home.style'
 import SearchBar from '@/components/SearchBar'
 import { useCallback, useEffect, useState } from 'react'
-import { ListRenderItemInfo, NativeScrollEvent, NativeSyntheticEvent } from 'react-native'
+import {
+  ListRenderItemInfo,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  useColorScheme,
+} from 'react-native'
 import Card from '@/components/Card'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { useRouter } from 'expo-router'
@@ -93,7 +98,7 @@ export default function Home() {
           renderItem={renderItem}
           keyExtractor={(item: any) => item.url}
         />
-        <StatusBar style='dark' />
+        <StatusBar style={useColorScheme() === 'dark' ? 'light' : 'dark'} />
       </Styled.Container>
     </GestureHandlerRootView>
   )
